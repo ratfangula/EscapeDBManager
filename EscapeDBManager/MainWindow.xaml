@@ -5,8 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EscapeDBManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="650" Width="1000">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Button x:Name="Fetch" Click="Fetch_Click">Fetch Active Rounds</Button>
+            <DataGrid Name="dataGridRoom" AutoGenerateColumns="True" ItemsSource="{Binding Path=LoadDataBinding}"
+                      Height="100"></DataGrid>
+        </StackPanel>
+        <StackPanel Grid.Row="0">
+            <Button VerticalAlignment="Bottom" x:Name="NewGame" Click="NewGame_Click">Create New Game</Button>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="5,5" Width="100">Game Name</TextBlock>
+                <TextBox x:Name="textGameName" Width="150" Margin="5,5"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="5,5" Width="100">Customer ID</TextBlock>
+                <TextBox x:Name="textCustomerID" Width="150" Margin="5,5"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="5,5" Width="100">Game Description</TextBlock>
+                <TextBox x:Name="textGameDescription" Width="150" Margin="5,5"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="5,5" Width="100">New Game ID</TextBlock>
+                <TextBox x:Name="textNewGameID" Width="150" Margin="5,5"></TextBox>
+            </StackPanel>
+            <Button VerticalAlignment="Bottom" x:Name="LoadGame" Click="LoadGame_Click">Load Game</Button>
+
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Button VerticalAlignment="Bottom" x:Name="AddTeamsToGame" Click="AddTeamsToGame_Click">Add Teams To Game</Button>
+            <DataGrid x:Name="dataGridTeam" ItemsSource="{Binding}" 
+                      CanUserAddRows="True" CanUserDeleteRows="True" IsTabStop="True"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="TeamName" IsReadOnly="False"
+                                        Binding="{Binding Name, Mode=TwoWay}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <DataGrid Name="dataGridRound" AutoGenerateColumns="True" ItemsSource="{Binding}"
+                     MaxHeight="300" ></DataGrid>
+            <Button VerticalAlignment="Bottom" x:Name="btnStartRound" Click="btnStartRound_Click" >Start Selected Round</Button>
+            <Button VerticalAlignment="Bottom" x:Name="btnNotifyTeam" Click="btnNotifyTeam_Click" >Notify Selected Team/Round</Button>
+            <Button x:Name="btnEndRound" Click="btnEndRound_Click" >End Round</Button>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnRemoveHint" Width="20" Margin="20,0,0,0" Click="btnRemoveHint_Click">-</Button>
+                <Label>Hints</Label>
+                <Button x:Name="btnAddHint" Width="20" Click="btnAddHint_Click">+</Button>
+
+                <Button x:Name="btnSetPlusTime" Margin="50,0,10,0" Width="125" Click="btnSetPlusTime_Click">Set Time Modifier</Button>
+                <TextBox x:Name="textPlusTime" Width="75"></TextBox>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
